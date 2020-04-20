@@ -20,7 +20,7 @@ function detect_disk
   # otherwise ask user to choose
   echo "Choose disk to use for installation:" >&2
   for i in (seq 1 $len)
-    echo " $i. $disks[$i]"
+    echo " $i. $disks[$i]" >&2
   end
 
   set -l choice 0

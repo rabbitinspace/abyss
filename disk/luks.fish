@@ -1,7 +1,8 @@
 # Encrypts disk partition.
 #
 # The partition will be encrypted via dm-crypt using aes-xts-plain64 chipher
-# with 512b key size and sha512 hash. The format used is LUKS1.
+# with 512 byets key size (256 for each key part) and sha512 hash.
+# The format used is LUKS1.
 #
 # Args:
 #   $part - path to the partition to encrypt.
@@ -14,6 +15,7 @@ function encrypt -a part -a pass
     --key-slot 1 \
     --key-size 512 \
     --hash sha512 \
+    --align-payload 4096 \
     luksFormat $part \
     >&2 -
 end
