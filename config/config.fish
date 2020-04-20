@@ -8,4 +8,4 @@ set LUKS_LABEL void
 set MOUNT_OPTS rw,noatime,nodiratime,ssd,compress=zstd,space_cache
 
 # top-level btrfs subvolumes to create (don't use 'boot' here)
-set BTRFS_SUBVOLS '' home snapshots
+set BTRFS_SUBVOLS ,home,snapshots

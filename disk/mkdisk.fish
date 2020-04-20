@@ -17,7 +17,7 @@ function mkbtrfs -a part -a opts -a vols
 
   set -l mnt /mnt
   mount -o $opts $part $mnt
-  for vol in $vols
+  for vol in (string split ',' $vols)
     mkdir -p "$mnt"/$vol
     btrfs subvolume create "$mnt"/@$vol >&2
   end
@@ -36,7 +36,7 @@ function mount_parts -a efi -a root -a vols -a opts
   set -l mnt /mnt
 
   # first, mount root partition and it's subvolumes
-  for vol in $vols
+  for vol in (string split ',' $vols)
     mount -o subvol=@$vol,$opts $root "$mnt"/$vol
   end
 
