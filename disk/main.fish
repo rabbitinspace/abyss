@@ -15,7 +15,7 @@ function prepare_disk
 
   set -l mapper (attach $root $LUKS_LABEL $LUKS_PASSWORD || exit 1)
   mkefi $efi || exit 1
-  mkbtrfs $root $MOUNT_OPTS $BTRFS_SUBVOLS || exit 1
+  mkbtrfs $mapper $MOUNT_OPTS $BTRFS_SUBVOLS || exit 1
 
-  mount_parts $efi $root $BTRFS_SUBVOLS $MOUNT_OPTS || exit 1
+  mount_parts $efi $mapper $BTRFS_SUBVOLS $MOUNT_OPTS || exit 1
 end

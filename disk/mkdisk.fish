@@ -13,7 +13,7 @@ end
 #   $opts - mount options to use for subvolume creation.
 #   $vols - list of subvolumes to create.
 function mkbtrfs -a part -a opts -a vols
-  mkfs.btrfs -s 4096 >&2
+  mkfs.btrfs -s 4096 $part >&2
 
   set -l mnt /mnt
   mount -o $opts $part $mnt
