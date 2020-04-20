@@ -1,0 +1,4 @@
+deps:
+
+- fish-shell
+- gptfdisk
