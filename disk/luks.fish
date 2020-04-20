@@ -1,6 +1,6 @@
 # Encrypts disk partition.
 #
-# The partition will be encrypted via dm-crypt using aes-xts-plain64 chipher
+# The partition will be encrypted via dm-crypt using aes-xts-plain64 cipher
 # with 512 byets key size (256 for each key part) and sha512 hash.
 # The format used is LUKS1.
 #
@@ -11,7 +11,7 @@ function encrypt -a part -a pass
   echo $pass \
     | cryptsetup \
     --type luks1 \
-    --chipher aes-xts-plain64 \
+    --cipher aes-xts-plain64 \
     --key-slot 1 \
     --key-size 512 \
     --hash sha512 \
