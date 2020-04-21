@@ -1,4 +1,4 @@
-set ROOT (type -q git && git rev-parse --show-toplevel || pwd)
+set ROOT (type -q git && git rev-parse --show-toplevel 2>/dev/null || pwd)
 set DIR (dirname (status --current-filename))
 
 source "$ROOT/common/log.fish"

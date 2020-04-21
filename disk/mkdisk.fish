@@ -50,7 +50,7 @@ function mount_parts -a efi -a root -a vols -a opts
   mount $efi "$mnt/boot/efi" || return 1
 
   # finally, create additional subvolumes
-  __create_nested_subvols $mnt
+  __create_nested_subvols $mnt || return 1
 end
 
 # Creates additional subvolumes for directories where CoW is not needed.
