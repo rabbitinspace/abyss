@@ -24,15 +24,16 @@ function prepare_disk
 
   set -l efi (get_partition $disk 1)
   set -l root (get_partition $disk 2)
+  set -g LUKS_PATH $root  # set root partition
 
   log_info "Encrypting $root."
-  if ! encrypt $root $LUKS_PASSWORD
+  if ! encrypt $root $LUKS_PASS
     log_err "Failed to create LUKS partition: $root."
     return 1
   end
 
   log_info "Attaching encrypted $root."
-  if ! set -l mapper (attach $root $LUKS_LABEL $LUKS_PASSWORD)
+  if ! set -l mapper (attach $root $LUKS_LABEL $LUKS_PASS)
     log_err "Failed to attach LUKS partition: $root."
     return 1
   end
