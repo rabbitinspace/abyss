@@ -32,5 +32,10 @@ function attach -a part -a name -a pass
     luksOpen $part $name -d \
     >&2 -
 
+  if test $status -ne 0
+    return $status
+  end
+
+  # print name of the mapped disk
   echo "/dev/mapper/$name"
 end

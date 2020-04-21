@@ -11,8 +11,11 @@ function detect_disk
   )
   set -l len (count $disks)
 
-  # if only one then print it
-  if test $len -le 1
+  if test $len -eq 0
+    # return error if no disks
+    return 1
+  else if test $len -eq 1
+    # return the disk if there's no other disks
     echo $disks
     return
   end

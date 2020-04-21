@@ -13,14 +13,19 @@ end
 #   $opts - mount options to use for subvolume creation.
 #   $vols - list of subvolumes to create.
 function mkbtrfs -a part -a opts -a vols
-  mkfs.btrfs -s 4096 $part >&2
+  # first, create fs
+  mkfs.btrfs -s 4096 $part >&2 || return 1
 
+  # and mount it
   set -l mnt /mnt
-  mount -o $opts $part $mnt
+  mount -o $opts $part $mnt || return 1
+
+  # second, create subvolumes
   for vol in (string split ',' $vols)
-    btrfs subvolume create "$mnt"/@$vol >&2
+    btrfs subvolume create "$mnt/@$vol" >&2 || return 1
   end
 
+  # finally, unmount everything
   umount -R $mnt
 end
 
@@ -36,22 +41,22 @@ function mount_parts -a efi -a root -a vols -a opts
 
   # first, mount root partition and it's subvolumes
   for vol in (string split ',' $vols)
-    mkdir -p "$mnt"/$vol
-    mount -o subvol=@$vol,$opts $root "$mnt"/$vol
+    mkdir -p "$mnt/$vol"
+    mount -o subvol=@$vol,$opts $root "$mnt/$vol" || return 1
   end
 
   # second, mount boot partition
-  mkdir -p "$mnt"/boot/efi
-  mount $efi "$mnt"/boot/efi
+  mkdir -p "$mnt/boot/efi" || return 1
+  mount $efi "$mnt/boot/efi" || return 1
 
-  # finally, create additional subvolumes to disable cow
+  # finally, create additional subvolumes
   __create_nested_subvols $mnt
 end
 
 # Creates additional subvolumes for directories where CoW is not needed.
 function __create_nested_subvols -a mnt
-  mkdir -p "$mnt"/var/cache
-  btrfs subvolume create "$mnt"/var/cache/xbps >&2
-  btrfs subvolume create "$mnt"/var/tmp >&2
-  btrfs subvolume create "$mnt"/srv >&2
+  mkdir -p "$mnt/var/cache"
+  for vol in var/cache/xbps var/tmp/srv
+    btrfs subvolume create "$mnt/$vol" >&2 || return 1
+  end
 end

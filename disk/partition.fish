@@ -23,13 +23,13 @@ end
 function get_partition -a disk -a index
   set -l partitions (
     lsblk $disk -o PATH,TYPE \
-        | grep part \
-        | cut -d ' ' -f 1
+      | grep part \
+      | cut -d ' ' -f 1
   )
 
   if ! contains $index (seq 1 (count $partitions))
     echo "No partition with at index $index" >&2
-    exit 1
+    return 1
   end
 
   echo $partitions[$index]
