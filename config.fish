@@ -13,7 +13,7 @@ set HOSTNAME abyss  # your machine's hostname
 set HARDWARECLOCK UTC  # change this if time isn't stored as UTC
 set TIMEZONE "Australia/Sydney"  # your timezone
 set KEYMAP us  # keymap to load
-set LANG en_US.UTF-8  # system language
-set LOCALES "en_US.UTF-8 UTF-8"  # comma-separated list of locales
+set LANG en_US  # system language
+set LOCALES "en_US"  # comma-separated list of locales
 
 set XBPS_REPO "https://alpha.de.repo.voidlinux.org/current"  # packages repository
