@@ -56,7 +56,7 @@ end
 # Creates additional subvolumes for directories where CoW is not needed.
 function __create_nested_subvols -a mnt
   mkdir -p "$mnt/var/cache"
-  for vol in var/cache/xbps var/tmp/srv
+  for vol in var/cache/xbps var/tmp srv
     btrfs subvolume create "$mnt/$vol" >&2 || return 1
   end
 end
