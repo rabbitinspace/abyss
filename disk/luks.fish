@@ -30,7 +30,7 @@ function attach -a part -a name -a pass
   echo $pass \
     | cryptsetup \
     luksOpen $part $name -d \
-    >&2 -
+    >&2 - || return 1
 
   if test $status -ne 0
     return $status

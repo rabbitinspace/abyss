@@ -37,7 +37,7 @@ end
 #   $vols - list of Btrfs subvolumes to mount.
 #   $opts - mount options for the rool partition.
 #   $mnt - mount point to use.
-function mount_parts -a efi -a root -a vols -a opts
+function mount_parts -a efi -a root -a vols -a opts -a mnt
   # first, mount root partition and it's subvolumes
   for vol in (string split ',' $vols)
     mkdir -p "$mnt/$vol"
