@@ -1,7 +1,10 @@
 #!/usr/bin/env fish
 
-function main
+set DIR (dirname (status --current-filename))
 
+function main
+  "$DIR/disk/main.fish"
+  "$DIR/base/main.fish"
 end
 
 main $argv

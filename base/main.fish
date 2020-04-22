@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set ROOT (type -q git && git rev-parse --show-toplevel 2>/dev/null || pwd)
 set DIR (dirname (status --current-filename))
 
@@ -9,7 +11,7 @@ source "$DIR/tabs.fish"
 source "$DIR/grub.fish"
 source "$DIR/chroot.fish"
 
-function bootstrap_system
+function main
   log_info "Installing base system."
   if ! install_base $XBPS_REPO /mnt
     log_err "Failed to install base system."
@@ -43,3 +45,5 @@ function bootstrap_system
   log_info "Chrooting for final setup."
   bootstrap_chrooted /mnt $ROOT
 end
+
+main $argv

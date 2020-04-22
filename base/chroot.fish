@@ -29,7 +29,7 @@ end
 #   $mnt - mount point where to copy bootstrap scripts.
 #   $self_path - path to the bootstrap directory.
 function __copy_self -a mnt -a self_path
-  cp -R "$self_path/base/chrooted/" $mnt
+  cp -R "$self_path/chrooted/" $mnt
   cp "$self_path/config.fish" $mnt
   cp "$self_path/common/log.fish" $mnt
 end

@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+
 set ROOT (type -q git && git rev-parse --show-toplevel 2>/dev/null || pwd)
 set DIR (dirname (status --current-filename))
 
@@ -9,7 +11,7 @@ source "$DIR/mkdisk.fish"
 source "$DIR/partition.fish"
 
 # Picks a disk and prepares it for base system installation.
-function prepare_disk
+function main
   log_info "Detecting disk for installation."
   if ! set -l disk (detect_disk)
     log_err "Failed to detect disk to use."
@@ -55,3 +57,5 @@ function prepare_disk
     return 1
   end
 end
+
+main $argv
