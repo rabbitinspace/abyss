@@ -4,6 +4,7 @@ set ROOT (type -q git && git rev-parse --show-toplevel 2>/dev/null || pwd)
 set DIR (dirname (status --current-filename))
 
 source "$ROOT/common/log.fish"
+source "$ROOT/config.fish"
 
 source "$DIR/detect.fish"
 source "$DIR/luks.fish"
