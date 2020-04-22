@@ -12,12 +12,12 @@ end
 #   $part - path to the partition to format.
 #   $opts - mount options to use for subvolume creation.
 #   $vols - list of subvolumes to create.
-function mkbtrfs -a part -a opts -a vols
+#   $mnt - mount point to use.
+function mkbtrfs -a part -a opts -a vols -a mnt
   # first, create fs
   mkfs.btrfs -s 4096 $part >&2 || return 1
 
   # and mount it
-  set -l mnt /mnt
   mount -o $opts $part $mnt || return 1
 
   # second, create subvolumes
@@ -36,9 +36,8 @@ end
 #   $root - path to root Btrfs partition.
 #   $vols - list of Btrfs subvolumes to mount.
 #   $opts - mount options for the rool partition.
+#   $mnt - mount point to use.
 function mount_parts -a efi -a root -a vols -a opts
-  set -l mnt /mnt
-
   # first, mount root partition and it's subvolumes
   for vol in (string split ',' $vols)
     mkdir -p "$mnt/$vol"

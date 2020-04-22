@@ -44,13 +44,13 @@ function prepare_disk
   end
 
   log_info "Formatting root partition: $mapper."
-  if ! mkbtrfs $mapper $MOUNT_OPTS $BTRFS_SUBVOLS
+  if ! mkbtrfs $mapper $MOUNT_OPTS $BTRFS_SUBVOLS /mnt
     log_err "Failed to create root partition: $mapper."
     return 1
   end
 
   log_info "Mounting all partitions for system installation."
-  if ! mount_parts $efi $mapper $BTRFS_SUBVOLS $MOUNT_OPTS
+  if ! mount_parts $efi $mapper $BTRFS_SUBVOLS $MOUNT_OPTS /mnt
     log_err "Failed to mount partition for system installation."
     return 1
   end

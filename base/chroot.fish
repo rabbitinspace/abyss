@@ -1,11 +1,35 @@
-function bootstrap_chrooted -a root
-  __bind_sys $root
+# Performs final system setup.
+#
+# Args:
+#   $mnt - mount point of the system.
+#   $self_path - path to the bootstrap directory.
+function bootstrap_chrooted -a mnt -a self_path
+  __bind_sys $mnt
+  __copy_self "$mnt/chrooted" $self_path
+
+  chroot $mnt /bin/fish "$mnt/chrooted/main.fish"
+  rm -rf "$mnt/chrooted"
 end
 
-function __bind_sys -a root
+# Binds necessary devices and directories into the system.
+#
+# Args:
+#   $mnt - mount point of the system.
+function __bind_sys -a mnt
   for dir in dev proc sys run
-    mkdir -p "$root/$dir"
-    mount --rbind /$dir "$root/$dir" || return 1
-    mount --make-rslave "$root/$dir" || return 1
+    mkdir -p "$mnt/$dir"
+    mount --rbind /$dir "$mnt/$dir" || return 1
+    mount --make-rslave "$mnt/$dir" || return 1
   end
+end
+
+# Copies bootstrap scripts into the system.
+#
+# Args:
+#   $mnt - mount point where to copy bootstrap scripts.
+#   $self_path - path to the bootstrap directory.
+function __copy_self -a mnt -a self_path
+  cp -R "$self_path/base/chrooted/" $mnt
+  cp "$self_path/config.fish" $mnt
+  cp "$self_path/common/log.fish" $mnt
 end

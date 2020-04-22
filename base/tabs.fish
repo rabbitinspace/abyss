@@ -4,8 +4,9 @@
 #
 # Args:
 #   $rpath - path to resources directory.
-function gen_fstab -a rpath
-  "$rpath/genfstab" -U /mnt >> /mnt/etc/fstab
+#   $mnt - mount point from where to generate fstab.
+function gen_fstab -a rpath -a mnt
+  "$rpath/genfstab" -U $mnt >> "$mnt/etc/fstab"
 end
 
 # Generates /etc/crypttab.
@@ -16,7 +17,7 @@ end
 # Args:
 #   $label - root partition label.
 #   $key - path to decryption key.
-function gen_crypttab -a label -a key
+function gen_crypttab -a label -a key -a mnt
   set -l line (blkid | grep "PARTLABEL=\"$label\"" | grep LUKS) || return 1
   set -l uuid (
     echo $line \
@@ -25,5 +26,5 @@ function gen_crypttab -a label -a key
       | tail -n1
   ) || return 1
 
-  echo "$label    UUID=$uuid    /boot/$key    luks,discard" >> /mnt/etc
+  echo "$label    UUID=$uuid    /boot/$key    luks,discard" >> "$mnt/etc/crypttab"
 end
