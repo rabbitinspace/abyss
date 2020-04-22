@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
 set ROOT (type -q git && git rev-parse --show-toplevel 2>/dev/null || pwd)
 set DIR (dirname (status --current-filename))

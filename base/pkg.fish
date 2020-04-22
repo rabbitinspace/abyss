@@ -4,7 +4,7 @@
 #   $repo - packages repository url.
 #   $root - installation root directory.
 function install_base -a repo -a root
-  set -l pkgs (__base_packages)
+  set -l pkgs (__base_packages | string split " ")
   xbps_install $repo -r $root $pkgs || return 1
 end
 
@@ -41,7 +41,8 @@ end
 function __mcode_pkg
   set -l vendor (cat /proc/cpuinfo | grep vendor | uniq)
   if string match -i '*intel' $vendor >/dev/null
-    echo intel-ucode
+    # TODO: replace with intel-ucode
+    echo linux-firmware-intel
   else if string match -i '*amd' $vendor >/dev/null
     echo linux-firmware-amd
   end

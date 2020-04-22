@@ -18,7 +18,7 @@ end
 #   $label - root partition label.
 #   $key - path to decryption key.
 function gen_crypttab -a label -a key -a mnt
-  set -l line (blkid | grep "PARTLABEL=\"$label\"" | grep LUKS) || return 1
+  set -l line (blkid | grep LUKS) || return 1
   set -l uuid (
     echo $line \
       | grep -Po '\sUUID=\"[\d\w\-]+\"' \
