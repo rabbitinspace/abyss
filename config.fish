@@ -2,7 +2,6 @@
 
 set LUKS_PASS "<REPLACE>"  # disk encryption password
 set LUKS_KEY volume.key  # name of the key to prevent entering decryption password twice
-set LUKS_PATH ''  # path to the root partition, will be set automatically
 set LUKS_LABEL void  # decrypted root partition label
 set MOUNT_OPTS rw,noatime,nodiratime,ssd,compress=zstd,space_cache  # mount options for the root partition
 set BTRFS_SUBVOLS ,home,snapshots  # top-level btrfs subvolumes to create (starts with ',' and no 'boot')

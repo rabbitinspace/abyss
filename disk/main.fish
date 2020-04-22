@@ -24,7 +24,6 @@ function prepare_disk
 
   set -l efi (get_partition $disk 1)
   set -l root (get_partition $disk 2)
-  set -g LUKS_PATH $root  # set root partition
 
   log_info "Encrypting $root."
   if ! encrypt $root $LUKS_PASS

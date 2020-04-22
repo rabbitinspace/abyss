@@ -25,5 +25,5 @@ function gen_crypttab -a label -a key
       | tail -n1
   ) || return 1
 
-  echo "$label    UUID=$uuid    $key    luks,discard" >> /mnt/etc
+  echo "$label    UUID=$uuid    /boot/$key    luks,discard" >> /mnt/etc
 end
