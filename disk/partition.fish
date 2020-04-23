@@ -10,7 +10,7 @@
 function partition -a disk -a label -a align
   sgdisk --zap-all --clear --mbrtogpt \
     --new 1:0:+550M --typecode 1:EF00 \
-    --new 2:0:0 --typecode 2:8300 --set-alignment $align --change-name $label \
+    --new 2:0:0 --typecode 2:8300 --set-alignment $align --change-name 2:$label \
     $disk >&2
 end
 
