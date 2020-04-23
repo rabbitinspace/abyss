@@ -9,7 +9,7 @@ source "$DIR/confs.fish"
 
 function main
   log_info "Configuring root."
-  if ! cfg_root
+  if ! cfg_root $ROOT_PASS
     log_err "Failed to configure root."
     return 1
   end
