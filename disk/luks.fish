@@ -7,7 +7,8 @@
 # Args:
 #   $part - path to the partition to encrypt.
 #   $pass - password that will be used to decrypt the partition.
-function encrypt -a part -a pass
+#   $align - sector alignment.
+function encrypt -a part -a pass -a align
   echo $pass \
     | cryptsetup \
     --type luks1 \
@@ -15,7 +16,7 @@ function encrypt -a part -a pass
     --key-slot 1 \
     --key-size 512 \
     --hash sha512 \
-    --align-payload 4096 \
+    --align-payload $align \
     luksFormat $part \
     >&2 -
 end

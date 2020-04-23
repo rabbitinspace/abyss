@@ -1,5 +1,6 @@
 # Partitioning
 
+set LUKS_ALIGH 4096  # sector alignment
 set LUKS_PASS SUPER_STRONG_PASSWORD  # disk encryption password
 set LUKS_KEY volume.key  # name of the key to prevent entering decryption password twice
 set LUKS_LABEL void  # decrypted root partition label

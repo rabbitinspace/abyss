@@ -5,10 +5,12 @@
 #
 # Args:
 #   $disk - name of the disk to partition.
-function partition -a disk
+#   $label - GPT label.
+#   $align - sector alignment.
+function partition -a disk -a label -a align
   sgdisk --zap-all --clear --mbrtogpt \
     --new 1:0:+550M --typecode 1:EF00 \
-    --new 2:0:0 --typecode 2:8300 \
+    --new 2:0:0 --typecode 2:8300 --set-alignment $align --change-name $label \
     $disk >&2
 end
 

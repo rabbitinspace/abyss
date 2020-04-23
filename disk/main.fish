@@ -20,7 +20,7 @@ function main
   end
 
   log_info "Partitioning $disk."
-  if ! partition $disk
+  if ! partition $disk $LUKS_LABEL $LUKS_ALIGN
     log_err "Failed to partition $disk."
     return 1
   end
@@ -29,7 +29,7 @@ function main
   set -l root (get_partition $disk 2)
 
   log_info "Encrypting $root."
-  if ! encrypt $root $LUKS_PASS
+  if ! encrypt $root $LUKS_PASS $LUKS_ALIGN
     log_err "Failed to create LUKS partition: $root."
     return 1
   end
@@ -47,7 +47,7 @@ function main
   end
 
   log_info "Formatting root partition: $mapper."
-  if ! mkbtrfs $mapper $MOUNT_OPTS $BTRFS_SUBVOLS /mnt
+  if ! mkbtrfs $mapper $MOUNT_OPTS $BTRFS_SUBVOLS $LUKS_ALIGN /mnt
     log_err "Failed to create root partition: $mapper."
     return 1
   end

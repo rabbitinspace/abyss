@@ -12,10 +12,11 @@ end
 #   $part - path to the partition to format.
 #   $opts - mount options to use for subvolume creation.
 #   $vols - list of subvolumes to create.
+#   $align - sector alignment.
 #   $mnt - mount point to use.
-function mkbtrfs -a part -a opts -a vols -a mnt
+function mkbtrfs -a part -a opts -a vols -a align -a mnt
   # first, create fs
-  mkfs.btrfs -s 4096 $part >&2 || return 1
+  mkfs.btrfs -s $align $part >&2 || return 1
 
   # and mount it
   mount -o $opts $part $mnt || return 1
