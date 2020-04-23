@@ -17,10 +17,10 @@ function autodecrypt -a label -a pass -a key -a mnt
     of="$mnt/boot/$key" \
     status=none || return 1
 
-  echo $pass \
+  echo -n $pass \
     | cryptsetup luksAddKey \
-    $part "$mnt/boot/$key" -d \
-    >&2 - || return 1
+    $part "$mnt/boot/$key" \
+    >&2 || return 1
 
   chmod 000 "$mnt/boot/$key"
   chmod -R g-rwx,o-rwx "$mnt/boot"

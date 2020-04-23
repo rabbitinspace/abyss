@@ -25,8 +25,8 @@ function main
     return 1
   end
 
-  set -l efi (get_partition $disk 1)
-  set -l root (get_partition $disk 2)
+  set -l efi (get_partition $disk 1) || return 1
+  set -l root (get_partition $disk 2) || return 1
 
   log_info "Encrypting $root."
   if ! encrypt $root $LUKS_PASS $LUKS_ALIGN

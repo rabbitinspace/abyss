@@ -9,7 +9,7 @@
 #   $pass - password that will be used to decrypt the partition.
 #   $align - sector alignment.
 function encrypt -a part -a pass -a align
-  echo $pass \
+  echo -n $pass \
     | cryptsetup \
     --type luks1 \
     --cipher aes-xts-plain64 \
@@ -18,7 +18,7 @@ function encrypt -a part -a pass -a align
     --hash sha512 \
     --align-payload $align \
     luksFormat $part \
-    >&2 -
+    >&2
 end
 
 # Decrypts encrypted partition and prints it's path.
@@ -28,10 +28,10 @@ end
 #   $name - name to use for the decrypted partition.
 #   $pass - decryption password.
 function attach -a part -a name -a pass
-  echo $pass \
+  echo -n $pass \
     | cryptsetup \
-    luksOpen $part $name -d \
-    >&2 - || return 1
+    luksOpen $part $name \
+    >&2 || return 1
 
   if test $status -ne 0
     return $status
