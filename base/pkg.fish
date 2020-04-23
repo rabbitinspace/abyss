@@ -30,7 +30,7 @@ function __base_packages
     cryptsetup \
     btrfs-progs \
     grub-x86_64-efi \
-    fish
+    fish-shell
 
   set -a pkgs (__mcode_pkg)
 

@@ -27,7 +27,7 @@ function cfg_locale -a lang -a locales
 
   # enable locales
   for locale in (string split ',' $locales)
-    echo "locale.UTF-8 UTF-8" >> /etc/default/libc-locales
+    echo "$locale.UTF-8 UTF-8" >> /etc/default/libc-locales
   end
 end
 

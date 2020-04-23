@@ -16,6 +16,6 @@ set KEYMAP us  # keymap to load
 set LANG en_US  # system language
 set LOCALES en_US  # comma-separated list of locales
 
-set XBPS_REPO https://ftp.swin.edu.au/voidlinux/  # packages repository
+set XBPS_REPO https://ftp.swin.edu.au/voidlinux/current  # packages repository
 
 set DRACUT_MODS drm  # comma-separated list of modules to load
