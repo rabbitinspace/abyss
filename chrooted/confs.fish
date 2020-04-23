@@ -78,6 +78,8 @@ function recfg_all
 
   xbps-reconfigure -f glibc-locales || return 1
   dracut --force --kver $kver || return 1
+
+  mkdir -p /boot/grub
   grub-mkconfig -o /boot/grub/grub.cfg || return 1
   grub-install \
     --target=x86_64-efi \
