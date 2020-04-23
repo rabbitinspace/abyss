@@ -12,7 +12,7 @@ end
 # Args:
 #   name - well, it's hostname.
 function cfg_hostname -a name
-  echo $naem > /etc/hostname
+  echo $name > /etc/hostname
 end
 
 # Configures system language and enabled locales.
@@ -23,11 +23,15 @@ end
 function cfg_locale -a lang -a locales
   # set language
   echo "LANG=$lang.UTF-8" > /etc/locale.conf
-  echo "LC_TIME=$lang.UTF-8"
+  echo "LC_TIME=$lang.UTF-8" >> /etc/locale.conf
 
   # enable locales
   for locale in (string split ',' $locales)
-    echo "$locale.UTF-8 UTF-8" >> /etc/default/libc-locales
+    set -l utf8l "$locale.UTF-8 UTF-8"
+    set -l path /etc/default/libc-locales
+
+    sed -i "/$utf8l/d" $path
+    echo $utf8l >> $path
   end
 end
 
@@ -52,7 +56,7 @@ end
 # Args:
 #   $mods - comma-separated list of modules to load.
 function cfg_dracut -a mods
-  echo 'add_dracutmodules+="crypt btrfs resume"' >> /etc/dracut.conf
+  echo 'add_dracutmodules+="crypt btrfs resume"' > /etc/dracut.conf
   echo 'tmpdir=/tmp' >> /etc/dracut.conf
 
   if set -l key (cat /etc/crypttab | grep -Po '/boot/[^\s]+')
