@@ -40,3 +40,4 @@ set EXT_NTP yes
 set EXT_SLOG yes
 set EXT_FIREWALL yes
 set EXT_SYS_RULES yes
+set EXT_TRIM yes
