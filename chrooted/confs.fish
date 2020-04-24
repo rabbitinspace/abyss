@@ -1,11 +1,7 @@
-# Configures root user.
-#
-# Args:
-#   $pass - root password.
-function cfg_root -a pass
+# Sets up permissions for the root filesystem.
+function cfg_perm
   chown root:root /
   chmod 755 /
-  echo "root:$pass" | chpasswd -c SHA512
 end
 
 # Sets hostname.

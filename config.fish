@@ -27,6 +27,7 @@ set XBPS_REPO https://ftp.swin.edu.au/voidlinux/current  # packages repository
 
 # USERS
 
-set ROOT_PASS SUPER_STRONG_PASSWORD  # root password
 set USER_NAME SUPER_USER  # name of the default user
 set USER_PASS SUPER_STRONG_PASSWORD  # password of the default user
+set USER_GROUPS wheel,users,audio,video,input  # comma-separated list of groups to add the user to
+set USER_SHELL /bin/bash  # login shell for the user

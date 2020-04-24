@@ -6,11 +6,12 @@ source "$DIR/config.fish"
 source "$DIR/log.fish"
 
 source "$DIR/confs.fish"
+source "$DIR/users.fish"
 
 function main
-  log_info "Configuring root."
-  if ! cfg_root $ROOT_PASS
-    log_err "Failed to configure root."
+  log_info "Configuring permissions."
+  if ! cfg_perm
+    log_err "Failed to configure permissions."
     return 1
   end
 
@@ -41,6 +42,12 @@ function main
   log_info "Reconfiguring system."
   if ! recfg_all
     log_err "Failed to reconfigure system."
+    return 1
+  end
+
+  log_info "Creating user."
+  if ! cfg_user $USER_NAME $USER_PASS $USER_GROUPS $USER_SHELL
+    log_err "Failed to create user."
     return 1
   end
 end
