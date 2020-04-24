@@ -7,14 +7,23 @@ source "$DIR/log.fish"
 
 source "$DIR/confs.fish"
 source "$DIR/users.fish"
+source "$DIR/xbps.fish"
 
 function main
+  __pre_cfg || return 1
+  __cfg || return 1
+  __post_cfg || return 1
+end
+
+function __pre_cfg
   log_info "Configuring permissions."
   if ! cfg_perm
     log_err "Failed to configure permissions."
     return 1
   end
+end
 
+function __cfg
   log_info "Configuring hostname."
   if ! cfg_hostname $HOSTNAME
     log_err "Failed to configure hostname."
@@ -44,10 +53,18 @@ function main
     log_err "Failed to reconfigure system."
     return 1
   end
+end
 
+function __post_cfg
   log_info "Creating user."
   if ! cfg_user $USER_NAME $USER_PASS $USER_GROUPS $USER_SHELL
     log_err "Failed to create user."
+    return 1
+  end
+
+  log_info "Configuring XBPS repository."
+  if ! cfg_repo $XBPS_REPO
+    log_err "Failed to configure XBPS repository."
     return 1
   end
 end

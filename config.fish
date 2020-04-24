@@ -31,3 +31,12 @@ set USER_NAME SUPER_USER  # name of the default user
 set USER_PASS SUPER_STRONG_PASSWORD  # password of the default user
 set USER_GROUPS wheel,users,audio,video,input  # comma-separated list of groups to add the user to
 set USER_SHELL /bin/bash  # login shell for the user
+
+# EXTENDED SETUP
+
+set EXT_CRON yes
+set EXT_DHCP yes
+set EXT_NTP yes
+set EXT_SLOG yes
+set EXT_FIREWALL yes
+set EXT_SYS_RULES yes

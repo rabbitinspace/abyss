@@ -9,6 +9,7 @@ function bootstrap_chrooted -a mnt -a self_path
 
   chroot $mnt /bin/fish "/chrooted/main.fish"
   rm -rf "$mnt/chrooted"
+  umount -R $mnt
 end
 
 # Binds necessary devices and directories into the system.
