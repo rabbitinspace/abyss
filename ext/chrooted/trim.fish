@@ -1,9 +1,9 @@
 function cfg_trim
   set -l path /etc/cron.weekly/fstrim
   mkdir -p (dirname $path)
-  rm $path
+  rm -f $path
 
-  __install_script || return 1
+  __install_script $path || return 1
   chmod a-x $path
 end
 

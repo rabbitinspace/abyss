@@ -1,3 +1,3 @@
-function cfg_ntp -a repo
+function cfg_ntp
   ln -sf /etc/sv/openntpd /var/service/
 end

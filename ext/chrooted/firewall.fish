@@ -4,9 +4,13 @@ function cfg_firewall
 end
 
 function __enable_rules
-  echo "
+  set -l run '
 if [ -e /etc/iptables/iptables.rules ]; then
   iptables-restore /etc/iptables/iptables.rules
 fi
-" >> /etc/rc.local
+'
+
+  if ! (cat /etc/rc.local | grep iptables-restore >/dev/null)
+    echo $run >> /etc/rc.local
+  end
 end

@@ -1,3 +1,3 @@
-function cfg_cron -a repo
+function cfg_cron
   ln -sf /etc/sv/cronie /var/service/
 end

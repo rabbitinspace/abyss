@@ -1,7 +1,7 @@
 function cfg_sys_rules
   set -l path /etc/sysctl.d/99-sysctl.conf
   mkdir -p (dirname $path)
-  rm $path
+  rm -r $path
 
   __kernel_rules $path
   __network_rules $path

@@ -18,7 +18,7 @@ source "$DIR/cfg.fish"
 function main
   if test $EXT_CRON = yes
     log_info "Configuring cron."
-    if ! cfg_cron $XBPS_REPO
+    if ! cfg_cron
       log_err "Failed to configure cron."
     end
   end
@@ -32,14 +32,14 @@ function main
 
   if test $EXT_NTP = yes
     log_info "Configuring ntp."
-    if ! cfg_ntp $XBPS_REPO
+    if ! cfg_ntp
       log_err "Failed to configure ntp."
     end
   end
 
   if test $EXT_SLOG = yes
     log_info "Configuring syslog."
-    if ! cfg_slog $XBPS_REPO
+    if ! cfg_slog
       log_err "Failed to configure syslog."
     end
   end
