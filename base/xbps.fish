@@ -1,5 +1,3 @@
-source "$ROOT/common/pkg.fish"
-
 # Installs base system packages.
 #
 # Args:
