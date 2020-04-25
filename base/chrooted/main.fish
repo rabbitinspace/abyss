@@ -3,7 +3,7 @@
 set DIR (dirname (status --current-filename))
 
 source "$DIR/config.fish"
-source "$DIR/log.fish"
+source "$DIR/common/log.fish"
 
 source "$DIR/confs.fish"
 source "$DIR/users.fish"

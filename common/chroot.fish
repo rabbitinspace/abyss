@@ -1,11 +1,11 @@
-# Performs final system setup.
+# Runs a script while being chrooted into another root.
 #
 # Args:
-#   $mnt - mount point of the system.
-#   $self_path - path to the bootstrap directory.
-function bootstrap_chrooted -a mnt -a self_path
+#   $mnt - path to directory to chroot into.
+#   $path - path to the directory with the 'main.fish' script to run.
+function run_chrooted -a mnt -a path
   __bind_sys $mnt
-  __copy_self "$mnt/chrooted" $self_path
+  __copy_path "$mnt/chrooted" $path
 
   chroot $mnt /bin/fish "/chrooted/main.fish"
   rm -rf "$mnt/chrooted"
@@ -24,14 +24,14 @@ function __bind_sys -a mnt
   end
 end
 
-# Copies bootstrap scripts into the system.
+# Copied scripts to run while being chrooted.
 #
 # Args:
 #   $mnt - mount point where to copy bootstrap scripts.
-#   $self_path - path to the bootstrap directory.
-function __copy_self -a mnt -a self_path
+#   $path - path to directory to copy.
+function __copy_path -a mnt -a path
   mkdir -p $mnt
-  cp -R "$self_path/chrooted/." $mnt
-  cp "$self_path/config.fish" $mnt
-  cp "$self_path/common/log.fish" $mnt
+  cp -R "$path/." $mnt
+  cp "$path/config.fish" $mnt
+  cp -R "$path/common" $mnt
 end

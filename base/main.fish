@@ -4,12 +4,14 @@ set ROOT (type -q git && git rev-parse --show-toplevel 2>/dev/null || pwd)
 set DIR (dirname (status --current-filename))
 
 source "$ROOT/common/log.fish"
+source "$ROOT/common/chroot.fish"
+source "$ROOT/common/xbps.fish"
+
 source "$ROOT/config.fish"
 
-source "$DIR/pkg.fish"
+source "$DIR/xbps.fish"
 source "$DIR/tabs.fish"
 source "$DIR/grub.fish"
-source "$DIR/chroot.fish"
 
 function main
   log_info "Installing base system."
@@ -43,7 +45,7 @@ function main
   end
 
   log_info "Chrooting for final setup."
-  bootstrap_chrooted /mnt $ROOT
+  run_chrooted /mnt "$DIR/chrooted"
 end
 
 main $argv

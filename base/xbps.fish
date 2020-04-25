@@ -1,3 +1,5 @@
+source "$ROOT/common/pkg.fish"
+
 # Installs base system packages.
 #
 # Args:
@@ -13,21 +15,6 @@ function install_base -a repo -a root
   else
     xbps_install $repo -r $root $mcode || return 1
   end
-end
-
-# Installs given packages from specified repository.
-#
-# Args:
-#   $repo - packages repository url.
-#   $... - list of packages to install.
-function xbps_install -a repo
-  xbps-install \
-    --force \
-    --ignore-conf-repos \
-    --sync \
-    --yes \
-    --repository $repo \
-    $argv[2..-1]
 end
 
 # Prints base system packages to install.
