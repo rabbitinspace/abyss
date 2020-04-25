@@ -45,7 +45,7 @@ function main
   end
 
   log_info "Chrooting for final setup."
-  run_chrooted /mnt "$DIR/chrooted"
+  run_chrooted /mnt "$DIR/chrooted" $ROOT
 end
 
 main $argv

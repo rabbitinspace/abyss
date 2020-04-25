@@ -3,9 +3,10 @@
 # Args:
 #   $mnt - path to directory to chroot into.
 #   $path - path to the directory with the 'main.fish' script to run.
-function run_chrooted -a mnt -a path
+#   $base - path to the bootscraap directory.
+function run_chrooted -a mnt -a path -a base
   __bind_sys $mnt
-  __copy_path "$mnt/chrooted" $path
+  __copy_path "$mnt/chrooted" $path $base
 
   chroot $mnt /bin/fish "/chrooted/main.fish"
   rm -rf "$mnt/chrooted"
@@ -29,9 +30,10 @@ end
 # Args:
 #   $mnt - mount point where to copy bootstrap scripts.
 #   $path - path to directory to copy.
-function __copy_path -a mnt -a path
+#   $base - path to the bootscraap directory.
+function __copy_path -a mnt -a path -a base
   mkdir -p $mnt
   cp -R "$path/." $mnt
-  cp "$path/config.fish" $mnt
-  cp -R "$path/common" $mnt
+  cp "$base/config.fish" $mnt
+  cp -R "$base/common" $mnt
 end
