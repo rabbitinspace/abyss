@@ -1,3 +1,3 @@
 function cfg_dhcp
-  ln -s /etc/sv/dhcpcd /var/service/
+  ln -sf /etc/sv/dhcpcd /var/service/
 end

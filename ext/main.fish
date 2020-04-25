@@ -5,6 +5,7 @@ set DIR (dirname (status --current-filename))
 
 source "$ROOT/common/log.fish"
 source "$ROOT/common/chroot.fish"
+source "$ROOT/common/xbps.fish"
 
 source "$ROOT/config.fish"
 

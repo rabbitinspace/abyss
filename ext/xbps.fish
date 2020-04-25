@@ -8,6 +8,6 @@ function install_extended -a repo -a mnt -a cron -a ntp -a slog
   end
 
   if test $slog = yes
-    xbsp_install $repo -r $mnt socklog-void || return 1
+    xbps_install $repo -r $mnt socklog-void || return 1
   end
 end
