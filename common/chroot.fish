@@ -5,10 +5,10 @@
 #   $path - path to the directory with the 'main.fish' script to run.
 #   $base - path to the bootscraap directory.
 function run_chrooted -a mnt -a path -a base
-  __bind_sys $mnt
-  __copy_path "$mnt/chrooted" $path $base
+  __bind_sys $mnt || return 1
+  __copy_path "$mnt/chrooted" $path $base || return 1
 
-  chroot $mnt /bin/fish "/chrooted/main.fish"
+  chroot $mnt /bin/fish "/chrooted/main.fish" || return 1
   rm -rf "$mnt/chrooted"
   umount -R $mnt
 end

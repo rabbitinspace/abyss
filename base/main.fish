@@ -45,7 +45,10 @@ function main
   end
 
   log_info "Chrooting for final setup."
-  run_chrooted /mnt "$DIR/chrooted" $ROOT
+  if ! run_chrooted /mnt "$DIR/chrooted" $ROOT
+    log_err "Final setup failed."
+    return 1
+  end
 end
 
 main $argv
