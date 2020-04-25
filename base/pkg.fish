@@ -5,12 +5,14 @@
 #   $root - installation root directory.
 function install_base -a repo -a root
   set -l pkgs (__base_packages | string split " ")
-
-  if echo $pkgs | string match -qr 'intel'
-    xbps_install $repo -r $root void-repo-nonfree || return 1
-  end
+  set -l mcode (__mcode_pkg)
 
   xbps_install $repo -r $root $pkgs || return 1
+  if echo $mcode | string match -qr 'intel'
+    xbps_install "$repo/nonfree" -r $root $mcode || return 1
+  else
+    xbps_install $repo -r $root $mcode || return 1
+  end
 end
 
 # Installs given packages from specified repository.
@@ -36,8 +38,6 @@ function __base_packages
     btrfs-progs \
     grub-x86_64-efi \
     fish-shell
-
-  set -a pkgs (__mcode_pkg)
 
   echo $pkgs
 end
