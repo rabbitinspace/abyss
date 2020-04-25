@@ -8,7 +8,20 @@ source "$ROOT/common/chroot.fish"
 
 source "$ROOT/config.fish"
 
+source "$DIR/xbps.fish"
+
 function main
+  if test $EXT_SETUP != yes
+    log_info "Skipping extended setup."
+    return
+  end
+
+  log_info "Installing extended packages."
+  if ! install_extended $XBPS_REPO /mnt $EXT_CRON $EXT_NTP $EXT_SLOG
+    log_err "Failed to install extended packages."
+    return 1
+  end
+
   log_info "Chrooting for extended setup."
   if ! run_chrooted /mnt "$DIR/chrooted" $ROOT
     log_err "Extended setup failed."

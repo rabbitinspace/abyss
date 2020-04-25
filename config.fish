@@ -34,6 +34,7 @@ set USER_SHELL /bin/bash  # login shell for the user
 
 # EXTENDED SETUP
 
+set EXT_SETUP yes
 set EXT_CRON yes
 set EXT_DHCP yes
 set EXT_NTP yes

@@ -13,6 +13,7 @@ source "$DIR/ntp.fish"
 source "$DIR/slog.fish"
 source "$DIR/sys.fish"
 source "$DIR/trim.fish"
+source "$DIR/cfg.fish"
 
 function main
   if test $EXT_CRON = yes
@@ -62,6 +63,12 @@ function main
     if ! cfg_trim
       log_err "Failed to configure TRIM job."
     end
+  end
+
+  log_info "Re-configuring packages."
+  if ! recfg_all
+    log_err "Failed to re-configure packages."
+    return 1
   end
 end
 
