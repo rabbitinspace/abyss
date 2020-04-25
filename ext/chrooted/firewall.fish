@@ -10,7 +10,7 @@ if [ -e /etc/iptables/iptables.rules ]; then
 fi
 '
 
-  if ! (cat /etc/rc.local | grep iptables-restore >/dev/null)
+  if ! cat /etc/rc.local | grep iptables-restore >/dev/null
     echo $run >> /etc/rc.local
   end
 end
