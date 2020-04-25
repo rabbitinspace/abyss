@@ -10,7 +10,7 @@ function run_chrooted -a mnt -a path -a base
 
   chroot $mnt /bin/fish "/chrooted/main.fish" || return 1
   rm -rf "$mnt/chrooted"
-  umount -R $mnt
+  __unbind_sys $mnt
 end
 
 # Binds necessary devices and directories into the system.
@@ -22,6 +22,16 @@ function __bind_sys -a mnt
     mkdir -p "$mnt/$dir"
     mount --rbind /$dir "$mnt/$dir" || return 1
     mount --make-rslave "$mnt/$dir" || return 1
+  end
+end
+
+# Unbnids everything that was bound by the __bind_sys function.
+#
+# Args:
+#   $mnt - mount point of the system.
+function __unbind_sys -a mnt
+  for dir in dev proc sys run
+    umount -R "$mnt/$dir"
   end
 end
 
