@@ -4,7 +4,7 @@ function cfg_trim
   rm -f $path
 
   __install_script $path || return 1
-  chmod a-x $path
+  chmod +x $path
 end
 
 function __install_script -a path
