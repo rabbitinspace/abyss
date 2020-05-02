@@ -5,7 +5,7 @@ Full Disk Encryption. It will not install anything you don't need (see below)
 and will leave the system almost like if you would install it by yourself when
 following official installation instructions.
 
-To keep it simple, the following choises were made:
+To keep things simple, the following choices were made:
 
 - Only UEFI systems are supported (yet?).
 - Only `glibc` is supported (yet?).
