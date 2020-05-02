@@ -11,7 +11,7 @@ set LUKS_PASS SUPER_STRONG_PASSWORD
 # name of the key to prevent entering decryption password twice
 set LUKS_KEY volume.key
 
-# label for the decrypted root partition
+# label for the mapped root partition
 set LUKS_LABEL void
 
 #
@@ -46,7 +46,7 @@ set LANG en_US
 # comma-separated list of locales
 set LOCALES en_US
 
-# comma-separated list of modules to load
+# comma-separated list of modules to add to initramfs
 set DRACUT_MODS drm
 
 #
