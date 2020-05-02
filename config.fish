@@ -1,44 +1,102 @@
+#
 # LUKS
+#
 
-set LUKS_ALIGN 4096  # sector alignment
-set LUKS_PASS SUPER_STRONG_PASSWORD  # disk encryption password
-set LUKS_KEY volume.key  # name of the key to prevent entering decryption password twice
-set LUKS_LABEL void  # decrypted root partition label
+# disk's sector alignment
+set LUKS_ALIGN 4096
 
+# disk encryption password
+set LUKS_PASS SUPER_STRONG_PASSWORD
+
+# name of the key to prevent entering decryption password twice
+set LUKS_KEY volume.key
+
+# label for the decrypted root partition
+set LUKS_LABEL void
+
+#
 # DRIVES
+#
 
-set MOUNT_OPTS rw,noatime,nodiratime,ssd,compress=zstd,space_cache  # mount options for the root partition
-set BTRFS_SUBVOLS ,home,snapshots  # top-level btrfs subvolumes to create (starts with ',' and no 'boot')
+# mount options for the root partition (remove ssd if not needed)
+set MOUNT_OPTS rw,noatime,nodiratime,ssd,compress=zstd,space_cache
 
+# top-level btrfs subvolumes to create (starts with ',' and no 'boot')
+set BTRFS_SUBVOLS ,home,snapshots
+
+#
 # SYSTEM
+#
 
-set HOSTNAME abyss  # your machine's hostname
-set HARDWARECLOCK UTC  # change this if time isn't stored as UTC
-set TIMEZONE Australia/Sydney  # your timezone
-set KEYMAP us  # keymap to load
-set LANG en_US  # system language
-set LOCALES en_US  # comma-separated list of locales
+# machine's hostname
+set HOSTNAME abyss
 
-set DRACUT_MODS drm  # comma-separated list of modules to load
+# change this if time isn't stored as UTC
+set HARDWARECLOCK UTC
 
+# your timezone
+set TIMEZONE Australia/Sydney
+
+# default keymap to load
+set KEYMAP us
+
+# system language
+set LANG en_US
+
+# comma-separated list of locales
+set LOCALES en_US
+
+# comma-separated list of modules to load
+set DRACUT_MODS drm
+
+#
 # XBPS
+#
 
-set XBPS_REPO https://ftp.swin.edu.au/voidlinux/current  # packages repository
+# url for the packages repo (default is https://alpha.de.repo.voidlinux.org/current)
+set XBPS_REPO https://ftp.swin.edu.au/voidlinux/current
 
+#
 # USERS
+#
 
-set USER_NAME SUPER_USER  # name of the default user
-set USER_PASS SUPER_STRONG_PASSWORD  # password of the default user
-set USER_GROUPS wheel,users,audio,video,input  # comma-separated list of groups to add the user to
-set USER_SHELL /bin/bash  # login shell for the user
+# name of the default user
+set USER_NAME SUPER_USER
 
+# password of the default user
+set USER_PASS SUPER_STRONG_PASSWORD
+
+# comma-separated list of groups to add the user to
+set USER_GROUPS wheel,users,audio,video,input
+
+# login shell for the user
+set USER_SHELL /bin/bash
+
+#
 # EXTENDED SETUP
+#
 
+# set to no to disable extended configuration
 set EXT_SETUP yes
+
+# install cron daemon (set to no to disable)
 set EXT_CRON yes
+
+# install dhcp daemon (set to no to disable)
 set EXT_DHCP yes
+
+# install ntp daemon (set to no to disable)
 set EXT_NTP yes
+
+# install syslog daemon (set to no to disable)
 set EXT_SLOG yes
+
+# enable firewall (set to no to disable)
 set EXT_FIREWALL yes
+
+# install syscctl rules for kernel hardening (set to no to disable)
 set EXT_SYS_RULES yes
+
+# enable weekly fstrim invocations (set no to disable)
+# -- disable it if you don't have ssd or if your ssd doesn't support TRIM --
 set EXT_TRIM yes
