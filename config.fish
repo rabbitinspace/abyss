@@ -29,7 +29,7 @@ set BTRFS_SUBVOLS ,home,snapshots
 #
 
 # machine's hostname
-set HOSTNAME abyss
+set HOSTNAME void
 
 # change this if time isn't stored as UTC
 set HARDWARECLOCK UTC
@@ -53,15 +53,15 @@ set DRACUT_MODS drm
 # XBPS
 #
 
-# url for the packages repo (default is https://alpha.de.repo.voidlinux.org/current)
-set XBPS_REPO https://ftp.swin.edu.au/voidlinux/current
+# package manager mirror
+set XBPS_REPO https://alpha.de.repo.voidlinux.org/current
 
 #
 # USERS
 #
 
 # name of the default user
-set USER_NAME SUPER_USER
+set USER_NAME abyss
 
 # password of the default user
 set USER_PASS SUPER_STRONG_PASSWORD
@@ -82,7 +82,7 @@ set EXT_SETUP yes
 # install cron daemon (set to no to disable)
 set EXT_CRON yes
 
-# install dhcp daemon (set to no to disable)
+# enable dhcp daemon (set to no to disable)
 set EXT_DHCP yes
 
 # install ntp daemon (set to no to disable)
@@ -94,9 +94,8 @@ set EXT_SLOG yes
 # enable firewall (set to no to disable)
 set EXT_FIREWALL yes
 
-# install syscctl rules for kernel hardening (set to no to disable)
+# enable some syscctl rules for kernel hardening (set to no to disable)
 set EXT_SYS_RULES yes
 
 # enable weekly fstrim invocations (set no to disable)
-# -- disable it if you don't have ssd or if your ssd doesn't support TRIM --
 set EXT_TRIM yes
