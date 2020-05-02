@@ -18,19 +18,6 @@ there's nothing which can start a graphical session. The only optional package
 that will be installed is `fish-shell` which is a runtime dependency and can be
 removed right away.
 
-You can also choose to do an extended installation which includes few additional
-steps:
-
-- Installs and enables a Cron daemon (`cronie`).
-- Installs and enables a NTP daemon (`openntpd`).
-- Installs and enables a syslog daemon (`socklog`).
-- Enables `iptables` (with shipped rules).
-- Enables `dhcpcd`.
-- Enables some `sysctl` rules for kernel and networking stack hardening.
-- Enables TRIM job for SSD.
-
-Each of the steps are optional and can be disabled/enabled in [`config.fish`](config.fish).
-
 ## Bugs
 
 Right now GRUB is always targetings `x86_64-efi` systems which prevents
@@ -46,6 +33,21 @@ installation on non x86-64 machines. This is a bug and will be fixed soonj.
   - If you don't have SSD, then remove `ssd` from `MOUNT_OPTS` and disable `EXT_TRIM`.
 - Run `./main.fish` after `cd`'ing into the project root.
 
+### Extended Setup
+
+You can also choose to do an extended installation which includes few additional
+steps:
+
+- Installs and enables a Cron daemon (`cronie`).
+- Installs and enables a NTP daemon (`openntpd`).
+- Installs and enables a syslog daemon (`socklog`).
+- Enables `iptables` (with shipped rules).
+- Enables `dhcpcd`.
+- Enables some `sysctl` rules for kernel and networking stack hardening.
+- Enables TRIM job for SSD.
+
+Each of the steps are optional and can be disabled/enabled in [`config.fish`](config.fish).
+
 ### Runtime Dependencies
 
 Before installing the system, install these packages:
@@ -56,8 +58,10 @@ Before installing the system, install these packages:
 ## After Installation
 
 You should be able to boot into the system and log in with the user which you
-specified in the configuration file. You now can remove `fish-shell` if you
-don't need it or try it out!
+specified in the configuration file. Now it's time to setup Xorg or Wayland.
+
+For a quick Xorg installation and configuration you can borrow [bootstrap](https://github.com/rabbitinspace/dotfiles/blob/master/bootstrap)
+script from my [dotfiles](https://github.com/rabbitinspace/dotfiles).
 
 ## Alternatives
 
