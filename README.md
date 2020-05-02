@@ -30,6 +30,11 @@ steps:
 
 Each of the steps are optional and can be disabled/enabled in [`config.fish`](config.fish).
 
+## Bugs
+
+Right now GRUB is always targetings `x86_64-efi` systems which prevents
+installation on non x86-64 machines. This is a bug and will be fixed soonj.
+
 ## Usage
 
 - Boot from USB drive and install runtime dependencies.
@@ -52,3 +57,9 @@ Before installing the system, install these packages:
 You should be able to boot into the system and log in with the user which you
 specified in the configuration file. You now can remove `fish-shell` if you
 don't need it or try it out!
+
+## Alternatives
+
+Abyss was inspired by a great [`voidvault`](https://github.com/atweiden/voidvault)
+project and provides a subset of it's functionality. Check it out if Abyss 
+doesn't meet your requirements. 
