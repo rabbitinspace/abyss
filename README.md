@@ -8,6 +8,7 @@ following official installation instructions.
 To keep it simple, the following choises were made:
 
 - Only UEFI systems are supported (yet?).
+- Only `glibc` is supported (yet?).
 - An entire disk is required for the installation.
 - Only Btrfs on LUKS is supported.
 - Only GRUB bootloader is supported.
