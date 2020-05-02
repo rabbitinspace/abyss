@@ -13,8 +13,9 @@ To keep it simple, the following choises were made:
 - Only GRUB bootloader is supported.
 
 After installation you'll end up with a system which you can log in into but 
-nothing more. The only optional package that will be installed is `fish-shell`
-which is a runtime dependency and can be removed after first log in.
+there's nothing which can start a graphical session. The only optional package
+that will be installed is `fish-shell` which is a runtime dependency and can be
+removed right away.
 
 You can also choose to do an extended installation which includes few additional
 steps:
