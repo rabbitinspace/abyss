@@ -67,7 +67,7 @@ set USER_NAME abyss
 set USER_PASS SUPER_STRONG_PASSWORD
 
 # comma-separated list of groups to add the user to
-set USER_GROUPS wheel,users,audio,video,input
+set USER_GROUPS wheel,users,audio,video,input,tty
 
 # login shell for the user
 set USER_SHELL /bin/bash
